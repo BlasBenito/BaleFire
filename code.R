@@ -10,6 +10,9 @@
 #working folder
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
+#folder to store results
+dir.create("output")
+
 #functions
 source("functions.R")
 
