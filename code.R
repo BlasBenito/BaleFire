@@ -17,11 +17,10 @@ dir.create("output")
 source("functions.R")
 
 #libraries
-library(rioja)
 library(dplyr)
 library(ggplot2)
-library(cowplot) #neat publishing theme for ggplot
-library(ggdendro) #to plot dendrograms with ggplot
+library(cowplot)
+library(ggdendro)
 library(viridis)
 library(nlme)
 library(tidyr)
