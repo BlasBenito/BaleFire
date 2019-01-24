@@ -1,4 +1,7 @@
 # BaleFire
+
+https://zenodo.org/badge/162700547.svg
+
 Quantitative analysis of Erica-Fire dynamics in Garba Guracha, Bale Mountains, Ethiopia
 
 This is an stand-alone R workflow, where:
