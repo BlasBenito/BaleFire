@@ -102,45 +102,12 @@ plotDiagram <- function(pollen.data, fire.data, fire.cluster, dendrogram, title,
     no.x.axis +
     common.theme
   
-  #fires per year
-  p4 <- ggplot() +
-    plot.even.groups +
-    plot.odd.groups + 
-    geom_segment(data=fire.data, aes(x=age, xend=age, y=fires.per.year, yend=0, color=fires.per.year)) + 
-    scale_color_viridis(direction=-1, option="inferno") +
-    ylab("Fires/yr 1000km2 \n") + 
-    x.limits +
-    no.x.axis +
-    common.theme
-  
-  #fire radiative power
-  p5 <- ggplot() + 
-    plot.even.groups +
-    plot.odd.groups + 
-    geom_segment(data=bale.charcoal, aes(x=age, xend=age,  y=fire.radiative.power, yend=0, color=fire.radiative.power)) + 
-    scale_color_viridis(direction=-1, option="inferno") +
-    ylab("Fire radiative power \n (MW/5027km2)") +
-    x.limits +
-    no.x.axis +
-    common.theme
-  
-  #burned area
-  p6 <- ggplot() + 
-    plot.even.groups +
-    plot.odd.groups + 
-    geom_segment(data=bale.charcoal, aes(x=age, xend=age, y=burned.area, yend=0, color=burned.area)) + 
-    scale_color_viridis(direction=-1, option="inferno") +
-    ylab("Burned area \n (km2/1000km2)") + 
-    xlab("Age (ka BP)") + 
-    x.limits +
-    common.theme + theme(axis.title.x = element_text(size=14))
-  
   
   #PLOTTING AND SAVING
   if(dendrogram==TRUE){
-  print(cowplot::plot_grid(p1, p2, p3, p4, p5, p6, align="v", ncol=1, rel_heights = c(1, rep(0.75, 4), 1.1)) + theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")))
+  print(cowplot::plot_grid(p1, p2, p3, align="v", ncol=1, rel_heights = c(1, rep(0.75, 2), 1.1)) + theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")))
   } else {
-  print(cowplot::plot_grid(p2, p3, p4, p5, p6, align="v", ncol=1, rel_heights = c(1, rep(0.75, 3), 1.1)) + theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")))
+  print(cowplot::plot_grid(p2, p3, align="v", ncol=1, rel_heights = c(1, rep(0.75, 1), 1.1)) + theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm")))
   }
   ggsave(filename = filename, width = width, height=height)
   
@@ -207,38 +174,6 @@ hclust2ggplot <- function(clust, new.x, min.y, max.y){
   clust.segment$yend <- scaleData(clust.segment$yend, old.min=min(clust.segment$yend), old.max=max(clust.segment$yend), new.max=max.y, new.min=min.y)
   
   return(clust.segment)
-}
-
-
-
-##### Functions to calculate burned areas and fire rotation period using equations for Macroscopic charcoal in Adolf et al. 2018
-
-#based on equation number 3 of Adolf et al. 2018 (GEB) and exponentiated to get non-log values
-FN <- function(x){
-  y <- 2.1802 * log10(x+1) + 0.207
-  #returns number of fires per year in a source area of 40km radius (ca. 5027 km2)
-  z <- 10^y-1 
-  #standardises numbers of fires per an area of 1000km2
-  (z/5027)*1000 
-}
-
-#based on equation number 6 in Adolf et al. 2018
-FRP <- function(x){
-  y<-3.2172*log10(x+1)+1.1002
-  #returns sum of fire radiative power in MW (not Watts/m2) of fires in a source area of 40km radius (ca. 5027 km2)
-  z<-10^y-1
-  #standardises sum of MW of fires per an area of 1000km2
-  (z/5027)*1000
-}
-
-
-##based on equation number 9 in Adolf et al. 2018
-BA <- function(x) {
-  y<-2.6429*log10(x+1)+0.712
-  #returns total burned area in km2 from a source area of 180km radius (ca. 101788 km2)
-  z<-10^y-1
-  #standardises sum of burned areas in an area of 1000km2
-  (z/101788)*1000 
 }
 
 
