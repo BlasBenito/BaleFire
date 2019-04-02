@@ -13,8 +13,8 @@ This code belongs with the *in prep* paper:
 Authored by:
 
 +  Graciela Gil-Romera
-+  Blas M. Benito
 +  Carole Adolf
++  Blas M. Benito
 +  Lucas Bittner
 +  Maria U. Johansson,
 +  David A. Grady
