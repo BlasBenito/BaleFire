@@ -31,8 +31,8 @@ Authored by:
 
 The code is organized as an R workflow with the following files:
 
-+  **data.RData** contains the required data.
++  **workflow.Rmd** is an Rmarkdown version of **code.R** that also includes further details about the methods used in the paper. This is the recommended
 +  **functions.R** contains the required functions to perform the analyses.
-+  **code.R** is the script to run the analyses.
-+  **workflow.Rmd** is an Rmarkdown version of **code.R** that also includes further details about the methods used in the paper.
++  **data.RData** contains the required data.
++  **code.R** is the script version of **workflow.Rmd**.
 +  **workflow.pdf** is the pdf version of **workflow.Rmd**.
