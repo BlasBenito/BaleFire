@@ -1,6 +1,6 @@
 # BaleFire
 
-[![DOI](https://zenodo.org/badge/162700547.svg)](https://zenodo.org/badge/latestdoi/162700547)
+[![DOI](https://zenodo.org/badge/162700150.svg)](https://zenodo.org/badge/latestdoi/162700150)
 
 Quantitative analysis of Erica-Fire dynamics in Garba Guracha, Bale Mountains, Ethiopia
 
