@@ -1,0 +1,31 @@
+\usepackage{fontspec}
+\setmainfont[Scale=1.2]{FreeSerif}
+\setmonofont[Scale=1.2]{FreeMono}
+\linespread{1.5}
+\usepackage{listings}
+\lstset{breaklines=true}
+\usepackage{stackengine}
+\newcommand\textsub[1]{\stackengine{-.5ex}{}{\scriptsize#1}{O}{l}{F}{F}{L}}
+
+\usepackage{float}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\usepackage{pdflscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+\usepackage{caption} 
+\captionsetup[table]{skip=10pt}
+\usepackage[tableposition=above]{caption}
+
+\usepackage[final]{pdfpages}
+\usepackage{lineno}
+\linenumbers
+          
+    
