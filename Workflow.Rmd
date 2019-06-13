@@ -1,6 +1,6 @@
 ---
 title: 'Supplementary Information'
-subtitle: 'Long-term post-fire resilience of the Ericaceous Belt, Bale Mountains, Ethiopia'
+subtitle: 'Long-term fire resilience of the Ericaceous Belt, Bale Mountains, Ethiopia'
 author: "Graciela Gil-Romera, Carole Adolf, Blas M. Benito, Lucas Bittner, Maria U. Johansson, David A. Grady, Henry F. Lamb, Bruk Lemma, Mekbib Fekadu, Bruno Glaser, Betelhem Mekonnen, Miguel Sevilla-Callejo, Michael Zech, Wolfgang Zech, Georg Miehe"
 output:
   pdf_document:
@@ -94,26 +94,37 @@ bale.data <- bale.data[61:nrow(bale.data), ]
 bale.data <- bale.data[bale.data$age <= 13.784,]
 ```
 
-**Note**: The PDF version of this document only shows the most relevant code used in our analyses. The complete code can be found in the Rmd version, available at https://github.com/ggilromera/BaleFire . The analyses here presented were performed using the follwing packages: *png* [1], *grid*[2], *ggplot2*[3], *tidyr* [4], *viridis*[5], *nlme*[6], *cowplot*[7], *formatR*[8], and *knitr*[9] 
+&nbsp;
 
-#Study site and core retrieval#
+&nbsp;
 
-Garba Guracha lake is 500 x 300 m (ca. 0,15 km\textsuperscript{2}) in size, with a maximum water depth of 6 m [10]. We recovered duplicate cores (BAL-GGU-1A, BAL-GGU-1B) using a Livingstone piston corer in February 2017, operated from a raft anchored at 5 m water depth. We reached a depth of 1680 cm (including water depth), similar to the depth previously published by Tiercelin et al. [10]. Both cores contain two sections between 12 and 13 m depth that could not be analysed as they are mainly coarse sand and gravel and could not be properly split when opening the cores or sampled. 
-Further information on core retrieval can be found in Bittner et al.[11]
+&nbsp;
 
-#Pollen and charcoal sampling# 
+&nbsp;
 
-We have analized samples between 1548 and 1472 cm and between 1178 and 60 cm, leaving out the unopen sections of the record. We analysed thus 1525 samples from which we are presenting in this study 1118, *i.e.* from 1178 to 60 cm. The top most 60 cm are still under analyses and the sediment below 1178 cm is not continuous while we want to focus our analyses on a continuous record of the fire and vegetation variables.
+**Note**: The PDF version of this document only shows the most relevant code used in our analyses. The complete code can be found in the Rmd version, available at https://github.com/blasbenito/BaleFire. The analyses here presented were performed using the following R packages: *png*[1], *grid*[2], *ggplot2*[3], *tidyr*[4], *viridis*[5], *nlme*[6], *cowplot*[7], *formatR*[8], and *knitr*[9]
 
-Charcoal particles (>150 µm) have been shown to be good proxies for local (*e.g.* Clark and Royall [12] or Peters and Higuera [13]) and sometimes even regional fire regimes [14,15]. Pollen source area (PSA) is both site and taxon-dependent as pollen productivity and dispersal patterns vary among plant species, and the size and nature of the lake and its catchment are approximately proportional to the pollen source area [16, 17]. *Erica* pollen grains are poorly dispersed, and their PSA has been proved to be essentially local [18,19].
+\newpage
 
-Charcoal particles were sampled at contiguous intervals of core GGU1B (except in the coarse sand and gravel sections) and digested by soaking 1- 2 cm\textsuperscript{3} sediment samples in 6% H\textsub{2}O\textsub{2} for 48h, sieving at 150 μm and counting under a binocular microscope (×40). Charcoal counting was accomplished according to existing literature, counting opaque, angular particles [12]. We analysed and counted 275 samples of *Erica* fossil pollen grains using a modified version of the laboratory protocol of Moore (1981) and adding *Lycopodium* spores in a known number to estimate pollen accumulation rates (PAR) (Stockmarr, 1971). Both charcoal and pollen values were transformed to influx (accumulation rates measured as particles/cm\textsuperscript{2} yr; CHAR and PAR respectively) in order 1) to account for the effect of different accumulation rates, 2) CHAR and PAR are better measurements of biomass burning and 3) to make them comparable when proceeding with numerical analyses.
+# Study site and core retrieval
 
-#Chronology: age model for BAL17-GGU-1B core#
+Garba Guracha lake is 500 x 300 m (ca. 0,15 km\textsuperscript{2}) in size, with a maximum water depth of 6 m [10]. We recovered duplicate cores (BAL-GGU17-1A, BAL-GGU17-1B) using a Livingstone piston corer in February 2017, operated from a raft anchored at 5 m water depth. We cored 15 one meter sections reaching a maximum depth of 1680 cm (including water depth), similar to the depth previously published by Tiercelin et al. [10]. Both cores contain two sections between 12 and 13 m depth that could not be analysed as they are mainly coarse sand and gravel and could not be properly split when opening the cores or sampled. 
+We retrieved one surface core with a 65cm length from the borehole BAL-GGU17-1A to be combined later with the analysed core BAL-GGU17-1B. 
 
-A full description of the methods used and the results obtained for  the depth-age model of the GGU-IB core can be found in Bittner et al. [11]. The chronology is based on 24 radiocarbon-dated samples of bulk sediment, charcoal particles and n-alkanes from core BAL-GGU-1B and 23 samples from the  surface core BAL-GGU-1A, dated by 210Pb-137Cs techniques. The age-depth model was built with the Bayesian approach implemented in the R package Bacon [20]. A summary of the samples dated and the model obtained can be found in ESM Table 1 and ESM Fig 1. 
 
-```{r, fig.height=6, fig.cap="ESM Figure 1: Bayesian age-depth model for Garba Guracha lake (3950m asl) performed with the dates presented in ESM Table 1. More details are found in Bittner et al [11].", echo=FALSE}
+# Pollen and charcoal sampling
+
+We have analyzed samples from core BAL-GGU17-1B between 1548 and 1472 cm and between 1178 and 60 cm, leaving out the unopen sections of the record and the surface core from BAL-GGU17-1Af. We analysed thus 1525 samples from which we are presenting in this study 1118, *i.e.* from 1178 to 60 cm. The top most 60 cm are still under analyses and the sediment below 1178 cm is not continuous while we want to focus our analyses on a continuous record of the fire and vegetation variables.
+
+Charcoal particles (>150 µm) have been shown to be good proxies for local (*e.g.* Clark and Royall [11] or Higuera [12]) and sometimes even regional fire regimes [13,14]. Pollen source area (PSA) is both site and taxon-dependent as pollen productivity and dispersal patterns vary among plant species, and the size and nature of the lake and its catchment are approximately proportional to the pollen source area [15,16]. *Erica* pollen grains are poorly dispersed, and their PSA has been proved to be essentially local [17,18].
+
+Charcoal particles were sampled at contiguous intervals of core GGU1B (except in the coarse sand and gravel sections) and digested by soaking 1- 2 cm\textsuperscript{3} sediment samples in 6% H\textsub{2}O\textsub{2} for 48h, sieving at 150 μm and counting under a binocular microscope (×40). Charcoal counting was accomplished according to existing literature, counting opaque, angular particles [12]. We analysed and counted 275 samples of *Erica* fossil pollen grains using a modified version of the laboratory protocol of Moore et al. [19] and adding *Lycopodium* spores in a known number to estimate pollen accumulation rates (PAR) [20]. Both charcoal and pollen values were transformed to influx (accumulation rates measured as particles/cm\textsuperscript{2} yr; CHAR and PAR respectively) in order 1) to account for the effect of different accumulation rates, 2) CHAR and PAR are better measurements of biomass burning and plant biomass and 3) to make them comparable when proceeding with numerical analyses.
+
+# Chronology: age model for BAL17-GGU-1B core
+
+Our chronology is based on 24 radiocarbon-dated samples of bulk sediment, charcoal particles and n-alkanes from core BAL-GGU-1B and 23 samples from the  surface core BAL-GGU-1A, dated by \textsuperscript{210}Pb-\textsuperscript{137}Cs techniques. The age-depth model was built with the Bayesian approach implemented in the R package Bacon [19]. A summary of the samples dated and the model obtained can be found in ESM Table 1 and ESM Fig 1. 
+
+```{r, fig.height=6, fig.cap="Bayesian age-depth model for Garba Guracha lake (3950m asl) performed with the dates presented in ESM Table 1. More details are found in Bittner et al [11].", echo=FALSE}
 grid.raster(readPNG("age_depth.png"))
 ```
 
@@ -149,9 +160,9 @@ plotDiagram(pollen.data=erica,
 \elandscape
 
 
-#Interpolation of charcoal into regular time intervals#
+# Interpolation of charcoal into regular time intervals
 
-To facilitate further analyses we interpolated the charcoal record into 10 years time-intervals. We modeled charcoal as a function of age with *loess*, by identifying the complexity value (parameter that controls de degree of smoothing) that maximized the correlation between observed and predicted charcoal values. We implemented the maximization algorithm within the function *interpolateDatasets*, which requires identifying the time span defining regular time intervals over which to interpolate the model result. 
+To facilitate further analyses we interpolated the charcoal record into 10 years time-intervals. We modeled charcoal as a function of age with *loess*, by identifying the complexity value (parameter that controls the degree of smoothing) that maximized the correlation between observed and predicted charcoal values. We implemented the maximization algorithm within the function *interpolateDatasets*, which requires identifying the time span defining regular time intervals over which to interpolate the model result. All functions and analyses for this section have also been written in R. 
 
 ```{r, size="small", message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 #requires time to find optimum span value
@@ -219,9 +230,9 @@ erica <- erica[erica$age <= max(char.interpolated$age), ]
 
 #Generalised Least Squares#
 
-GLS provides robust estimates of regression parameters even when model residuals are heteroscedastic [21], a common problem of linear models fitted on time series data. We used the *gls*  function of the **nlme** package [6] to fit three different sets of models, one assessing the relationship between synchronous values of charcoal and Erica PAR, and two others assessing time-delayed relationships between charcoal and Erica, and viceversa.
+GLS provides robust estimates of regression parameters even when model residuals are heteroscedastic [21], a common problem of linear models fitted on time series data. We used the R packages  *gls*  function of the **nlme** package [6] to fit three different sets of models, one assessing the relationship between synchronous values of charcoal and Erica PAR, and two others assessing time-delayed relationships between charcoal and Erica, and viceversa.
 
-##Synchronous model: concurrent effect of charcoal accumulation rate on Erica abundance##
+## Synchronous model: concurrent effect of charcoal accumulation rate on Erica abundance
 
 The code below shows the procedure used to fit the synchronous model (**Equation 1**), where Erica abundance was used as response variable, and charcoal accumulation rate (interpolated to regular time) as predictor. Intercept was left free, under the assumption that under zero fire, Erica abundances would likely be higher than zero.
 
@@ -254,7 +265,7 @@ erica.char.gls.R2 <- cor(erica.char$ericaceae.par,
 
 The model showed a pseudo R-squared value (*gls* does not compute R-squared) of `r round(erica.char.gls.R2, 3)`. **Figure 4** shows the data and the fitted model.
 
-```{r, fig.height=5, echo=FALSE, fig.cap="Erica abundances paired with synchronous samples of charcoal accumulation rate. Straight line shows the fit of the GLS model shown above.."}
+```{r, fig.height=5, echo=FALSE, fig.cap="Erica abundances paired with synchronous samples of charcoal accumulation rate. Straight line shows the fit of the GLS model shown above."}
 #adding predicted and residual values to erica.char
 erica.char$ericaceae.par.predicted <- predict(erica.char.gls)
 
@@ -268,7 +279,7 @@ ggplot(data=erica.char, aes(x=charcoal.acc.rate, y=ericaceae.par)) +
   theme(text=element_text(size=12), plot.title=element_text(size = 16))
 ```
 
-###Generating time-delayed (lagged) data##
+### Generating time-delayed (lagged) data
 
 The analysis described in the next section requires the data to be expressed in time-lags, which involves aligning the samples of a given response variable with antecedent values of a given predictor or predictors. In our data, if we consider first Erica abundances (PAR) to be the response variable, and interpolated charcoal accumulation rates (CHAR) to be the predictor, for a lag of 10 years, the first PAR sample, with age 0.23 ka BP, has to be paired with the antecedent CHAR sample, with age 0.24 ka BP. The process is repeated for every sample and every lag, in our case up to 100 lags (1000 years) are considered.
 
@@ -298,7 +309,7 @@ lag.data.backward <- backwardLags(
 **Figure 6** shows both datasets for lags 1 (10 years), 25 (250 years), 50 (500 years), 75 (750 years), and 100 (1000 years). It also shows an advance of the models that will be fitted in the following section.
 
 
-```{r, echo=FALSE, fig.height=11, fig.cap="Lags 1, 25, 50, 75, , and 100 of the backward and forward datasets. Lag number can be found withing the grey strips. They have to be multiplied by 10 to convert lags into years. Lines represent linear models equivalent to those fitted in the following section."}
+```{r, echo=FALSE, fig.height=11, fig.cap="Lags 1, 25, 50, 75, and 100 of the backward and forward datasets. Lag number can be found withing the grey strips. They have to be multiplied by 10 to convert lags into years. Lines represent linear models equivalent to those fitted in the following section."}
 
 #preparing plotting data (8 lags only)
 temp.forward <- lag.data.forward
@@ -330,7 +341,7 @@ plot.past <- ggplot(data=temp.backward, aes(x=charcoal.acc.rate, y=ericaceae.par
     print(cowplot::plot_grid(plot.past, plot.future, align="h", ncol=2))
 ```
 
-##Asynchronous models: time-delayed links between Erica abundance and charcoal accumulation rate##
+## Asynchronous models: time-delayed links between Erica abundance and charcoal accumulation rate
 
 We aim to answer the questions: 1) Does Erica abundance have an effect on subsequent charcoal accumulation rates? 2) Are there time-delayed effects of charcoal accumulation rates on Erica abundances?; 
 
@@ -400,9 +411,9 @@ plotModelOutput(forward.results=forward.results,
 \newpage
  
 
-#Bibliography#
+# Bibliography
 
-[1] Urbanek, S. png: Read and write PNG images https://cran.r-project.org/web/packages/png/index.html . 2013. 
+[1] Urbanek, S. png: Read and write PNG images https://cran.r-project.org/web/packages/png/index.html. 2013. 
 
 [2] R Core Team.  R: A Language and Environment for Statistical Computing. Vienna, Austria: R Foundation for Statistical Computing. https://www.R-project.org/. 2018.
 
@@ -422,27 +433,29 @@ plotModelOutput(forward.results=forward.results,
 
 [10] Tiercelin, J.J. et al., “High-resolution sedimentary record of the last deglaciation from a high-altitude lake in Ethiopia,” Quaternary Science Reviews, vol. 27, no. 5, pp. 449–467, Mar. 2008.
 
-[11] Bittner,L. et al.  Revisiting Lake Garba Guracha in the afro-alpine Bale Mountains of Ethiopia - rationale, chronology and geochemistry. In prep.
+[11] Clark, J.S. and Royall,P.D. Local and regional sediment charcoal evidence for fire regimes in presettlement north-eastern North America. Journal of Ecology, vol. 84, pp. 365–382, 1996.
 
-[12] Clark, J.S. and Royall,P.D. Local and regional sediment charcoal evidence for fire regimes in presettlement north-eastern North America. Journal of Ecology, vol. 84, pp. 365–382, 1996.
+[12] Higuera, P.E., et al. Understanding the origin and analysis of sediment-charcoal records with a simulation model. Quaternary Science Reviews, vol. 26, no. 13–14, pp. 1790–1809, 2007.
 
-[13] Higuera, P.E., et al. Understanding the origin and analysis of sediment-charcoal records with a simulation model. Quaternary Science Reviews, vol. 26, no. 13–14, pp. 1790–1809, 2007.
+[13] Adolf, C. et al., The sedimentary and remote-sensing reflection of biomass burning in Europe. Global Ecol Biogeogr, vol. 27, no. 2, pp. 199–212, 2018.
 
-[14] Adolf, C. et al., The sedimentary and remote-sensing reflection of biomass burning in Europe. Global Ecol Biogeogr, vol. 27, no. 2, pp. 199–212, 2018.
+[14] Oris, F. et al., ‘Charcoal dispersion and deposition in boreal lakes from 3 years of monitoring: Differences between local and regional fires’, Geophysical Research Letters, vol. 41, no.2, p. 6743-6752. doi: 10.1002/2014GL060984, Aug. 2014.
 
-[15] Oris, F. et al., ‘Charcoal dispersion and deposition in boreal lakes from 3 years of monitoring: Differences between local and regional fires’, Geophysical Research Letters, vol. 41, no.2, p. 6743-6752. doi: 10.1002/2014GL060984, Aug. 2014.
-
-[16] Davis, M.B. On the theory of pollen analysis. American Journal of Science, vol. 261, no. 10, pp 897–912. 1963.
+[15] Davis, M.B. On the theory of pollen analysis. American Journal of Science, vol. 261, no. 10, pp 897–912. 1963.
 
 
-[17] Davis, M.B. Redepostion of pollen grains in lake sediments. Limnology and Oceanography, vol. 18, no. 1, pp. 44–52, Jan. 1973.
+[16] Davis, M.B. Redepostion of pollen grains in lake sediments. Limnology and Oceanography, vol. 18, no. 1, pp. 44–52, Jan. 1973.
 
-[19] Schüler, et al., “Relationship between vegetation and modern pollen-rain along an elevational gradient on Kilimanjaro, Tanzania,” The Holocene, vol. 24, no. 6, pp 702-713. 2014.
+[17] Schüler, et al., “Relationship between vegetation and modern pollen-rain along an elevational gradient on Kilimanjaro, Tanzania,” The Holocene, vol. 24, no. 6, pp 702-713. 2014.
 
-[19] Bonnefille, R. and Riollet,G. The Kashiru Pollen Sequence (Burundi) Palaeoclimatic Implications for the last 40,000 yr B.P. in Tropical Africa. Quaternary Research, vol. 30, pp. 19–35, 1988.
+[18] Bonnefille, R. and Riollet,G. The Kashiru Pollen Sequence (Burundi) Palaeoclimatic Implications for the last 40,000 yr B.P. in Tropical Africa. Quaternary Research, vol. 30, pp. 19–35, 1988.
 
-[20] Blaauw, M. and Christen,J.A. Flexible paleoclimate age-depth models using an autoregressive gamma process. Bayesian Analysis vol. 6, no. 3, pp. 457–474, 2011.
+[19] Moore, P.D., Collinson, M., Webb, J.A. Pollen Analysis, New Edition of 2 Revised Edition. Wiley-Blackwell. 216 pp. 1994.
 
-[21] Aitken,A.C. “IV.—On Least Squares and Linear Combination of Observations,” Proceedings of the Royal Society of Edinburgh, vol. 55, pp. 42–48, 1936.
+[20] Stockmarr, J., 1973. Determination of spore concentration with an electronic particle counter. Danm.geol.Unders. Arbog 1972, 87–89.
+
+[21] Blaauw, M. and Christen,J.A. Flexible paleoclimate age-depth models using an autoregressive gamma process. Bayesian Analysis vol. 6, no. 3, pp. 457–474, 2011.
+
+[22] Aitken,A.C. “IV.—On Least Squares and Linear Combination of Observations,” Proceedings of the Royal Society of Edinburgh, vol. 55, pp. 42–48, 1936.
 
 
