@@ -9,7 +9,7 @@ plotDiagram <- function(pollen.data, fire.data, title, title.size, text.size, wi
   no.x.axis = theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.ticks.x=element_blank(), axis.line.x=element_blank())
 
   #common theme
-  common.theme = theme(text = element_text(size=text.size), legend.position="none", plot.margin = unit(c(0, 1, 0.1, 0), "cm"),  axis.text.y = element_text(size=text.size))
+  common.theme = theme(text = element_text(size=text.size), legend.position="right", plot.margin = unit(c(0, 1, 0.1, 0), "cm"),  axis.text.y = element_text(size=text.size))
 
   #theme to remove y axis completely
   no.y.axis = theme(axis.title.y=element_blank(), axis.text.y=element_blank(), axis.ticks.y=element_blank(), axis.line.y=element_blank(), text = element_text(size=text.size))
@@ -26,7 +26,8 @@ plotDiagram <- function(pollen.data, fire.data, title, title.size, text.size, wi
       ylab("Erica PAR \n (gr./cm2 yr)") +
       x.limits +
       no.x.axis +
-      common.theme
+      common.theme +
+      labs(color = "PAR")
 
    #charcoal
   p2 = ggplot() +
@@ -35,7 +36,8 @@ plotDiagram <- function(pollen.data, fire.data, title, title.size, text.size, wi
     ylab("CHAR \n (part./cm2 yr)") +
     x.limits +
     xlab("Age (Ka BP)") +
-    common.theme
+    common.theme +
+    labs(color = "CHAR")
 
 
   #PLOTTING AND SAVING
