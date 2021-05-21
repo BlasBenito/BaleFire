@@ -48,6 +48,17 @@ citation_package: natbib
 <!-- $\frac{a}{b}$ -->
 <!-- $\left(\frac{a}{b}\right)$ -->
 
+# Reproducing this notebook
+
+This reproducible workflow is available as an interactive Rstudio notebook in the file **moiscrust.Rmd** stored in this repository. It is packaged with [renv](https://cran.r-project.org/package=renv) to facilitate reproducibility. That means that the R package versions originally used to run the notebook are already installed in the `renv` folder of the repository. To run it in your computer, execute the code chunk below to prepare the session. You will need to replace `eval = FALSE` with `eval = TRUE` in the header of the code chunk.
+
+```{r, eval = FALSE}
+install.packages("renv")
+library(renv)
+renv::restore()
+```
+
+
 ```{r setup, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, results="hide"}
 
 options(scipen=999)
