@@ -1,7 +1,12 @@
 ---
 title: 'Supplementary Information'
 subtitle: 'Long-term fire resilience of the Ericaceous Belt, Bale Mountains, Ethiopia'
-author: "Graciela Gil-Romera, Carole Adolf, Blas M. Benito, Lucas Bittner, Maria U. Johansson, David A. Grady, Henry F. Lamb, Bruk Lemma, Mekbib Fekadu, Bruno Glaser, Betelhem Mekonnen, Miguel Sevilla-Callejo, Michael Zech, Wolfgang Zech, Georg Miehe"
+author: |
+ | Graciela Gil-Romera, Carole Adolf, Blas M. Benito, 
+ | Lucas Bittner, Maria U. Johansson, David A. Grady, 
+ | Henry F. Lamb, Bruk Lemma, Mekbib Fekadu, Bruno Glaser, 
+ | Betelhem Mekonnen, Miguel Sevilla-Callejo, Michael Zech, 
+ | Wolfgang Zech, Georg Miehe
 output:
   pdf_document:
     fig_caption: yes
@@ -25,39 +30,18 @@ urlcolor: blue
 citation_package: natbib
 ---
 
-<!-- knit_hooks$set(document  =  function(x) {sub('\\usepackage[]{color}', '\\usepackage{xcolor}', x, fixed = TRUE)}) -->
-
-<!-- main info on pdf and notebooks -->
-<!-- http://rmarkdown.rstudio.com/pdf_document_format.html#latex_engine -->
-
-<!-- check xelatex fonts -->
-<!-- fc-list : family -->
-<!-- fc-list :fontformat = TrueType -->
-
-<!-- Equations cheatsheet -->
-<!-- $a_{b}$ -->
-<!-- $a^{b}$ -->
-<!-- $\alpha, \beta, \ldots$ -->
-<!-- $\sum_{n = 1}^N$ -->
-<!-- $\times$ -->
-<!-- $\prod_{n = 1}^N$ -->
-<!-- $<, \leq, \geq$ -->
-<!-- $\sim$ -->
-<!-- $\widehat{\alpha}$ -->
-<!-- $\bar{x}$ -->
-<!-- $\frac{a}{b}$ -->
-<!-- $\left(\frac{a}{b}\right)$ -->
+\newpage
 
 # Reproducing this notebook
 
-This reproducible workflow is available as an interactive Rstudio notebook in the file **moiscrust.Rmd** stored in this repository. It is packaged with [renv](https://cran.r-project.org/package=renv) to facilitate reproducibility. That means that the R package versions originally used to run the notebook are already installed in the `renv` folder of the repository. To run it in your computer, execute the code chunk below to prepare the session. You will need to replace `eval = FALSE` with `eval = TRUE` in the header of the code chunk.
+This reproducible workflow is available as an interactive Rstudio notebook in the file **Workflow.Rmd** stored in this repository. It is packaged with [renv](https://cran.r-project.org/package=renv) to facilitate reproducibility. That means that the R package versions originally used to run the notebook are already installed in the `renv` folder of the repository. To run it in your computer, execute the code chunk below to prepare the session. You will need to replace `eval = FALSE` with `eval = TRUE` in the header of the code chunk.
 
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 install.packages("renv")
-library(renv)
 renv::restore()
 ```
 
+The PDF version of this document only shows the most relevant code used in our analyses. The complete code can be found in the Rmd version, available at https://github.com/blasbenito/BaleFire. The analyses here presented were performed using the following R packages: *png*[1], *grid*[2], *ggplot2*[3], *tidyr*[4], *viridis*[5], *nlme*[6], *cowplot*[7], *formatR*[8], and *knitr*[9]
 
 ```{r setup, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE, results="hide"}
 
@@ -65,9 +49,23 @@ options(scipen=999)
 
 #checking if required packages are installed, and installing them if not
 #checking if required packages are installed, and installing them if not
-list.of.packages <- c("png", "grid", "ggplot2", "tidyr", "viridis", "nlme", "cowplot", "formatR", "knitr", "tidyr")
+list.of.packages <- c(
+  "png", 
+  "grid", 
+  "ggplot2", 
+  "tidyr", 
+  "viridis", 
+  "nlme", 
+  "cowplot", 
+  "formatR", 
+  "knitr", 
+  "tidyr"
+  )
+
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages, dep = TRUE)
+if(length(new.packages)){
+  install.packages(new.packages, dep = TRUE)
+  }
 
 #loading libraries
 library(png)
@@ -84,7 +82,11 @@ library(knitr)
 def.chunk.hook  <- knitr::knit_hooks$get("chunk")
 knitr::knit_hooks$set(chunk = function(x, options) {
   x <- def.chunk.hook(x, options)
-  ifelse(options$size != "normalsize", paste0("\\", options$size,"\n\n", x, "\n\n \\normalsize"), x)
+  ifelse(
+    options$size != "normalsize", 
+    paste0("\\", options$size,"\n\n", x, "\n\n \\normalsize"), 
+    x
+    )
 })
 
 #trying to line-wrap code in pdf output
@@ -99,21 +101,15 @@ source("functions.R")
 load("data.RData")
 
 #subsetting data 
+
 #removing first 60 samples 
 bale.data <- bale.data[61:nrow(bale.data), ]
+
 #removing ages older than 13.7k
 bale.data <- bale.data[bale.data$age <= 13.784,]
 ```
 
-&nbsp;
 
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-**Note**: The PDF version of this document only shows the most relevant code used in our analyses. The complete code can be found in the Rmd version, available at https://github.com/blasbenito/BaleFire. The analyses here presented were performed using the following R packages: *png*[1], *grid*[2], *ggplot2*[3], *tidyr*[4], *viridis*[5], *nlme*[6], *cowplot*[7], *formatR*[8], and *knitr*[9]
 
 \newpage
 
@@ -156,14 +152,16 @@ erica$age <- round(erica$age, 3)
 char <- na.omit(bale.data[, c("age", "charcoal.acc.rate")])
 char$age <- round(char$age, 3)
 
-plotDiagram(pollen.data=erica,
-            fire.data=char, 
-            title="Garba Guracha (3950 masl)", 
-            title.size=16, 
-            text.size=12,
-            width=12, 
-            height=6, 
-            filename="Chronostratigraphical_diagram.pdf")
+plotDiagram(
+  pollen.data = erica,
+  fire.data = char,
+  title = "Garba Guracha (3950 masl)",
+  title.size = 16,
+  text.size = 12,
+  width = 12,
+  height = 6,
+  filename = "Chronostratigraphical_diagram.pdf"
+  )
 ```
 
 \vfill
@@ -173,23 +171,30 @@ plotDiagram(pollen.data=erica,
 
 # Interpolation of charcoal into regular time intervals
 
-To facilitate further analyses we interpolated the charcoal record into 10 years time-intervals. We modeled charcoal as a function of age with *loess*, by identifying the complexity value (parameter that controls the degree of smoothing) that maximized the correlation between observed and predicted charcoal values. We implemented the maximization algorithm within the function *interpolateDatasets*, which requires identifying the time span defining regular time intervals over which to interpolate the model result. All functions and analyses for this section have also been written in R. 
+To facilitate further analyses we interpolated the charcoal record into 100 years time-intervals. We modeled charcoal as a function of age with *loess*, by identifying the complexity value (parameter that controls the degree of smoothing) that maximized the correlation between observed and predicted charcoal values. We implemented the maximization algorithm within the function *interpolateDatasets*, which requires identifying the time span defining regular time intervals over which to interpolate the model result.
 
 ```{r, size="small", message=FALSE, warning=FALSE, error=FALSE, results="hide"}
 #requires time to find optimum span value
-char.interpolated<-interpolateDatasets(
-  datasets.list=list(char=char), 
-  age.column.name="age", 
-  interpolation.time.step=0.01 #ka
+char.interpolated <- interpolateDatasets(
+  datasets.list = list(char = char), 
+  age.column.name = "age", 
+  interpolation.time.step = 0.01 #ka
   )
 ```
 
-The interpolation of charcoal into 10 years time-intervals only generated 248 new samples. To improve the quality of the interpolation, we replaced the interpolated values with the observed ones where possible, as shown below.
+The interpolation of charcoal into 100 years time-intervals only generated 248 new samples. To improve the quality of the interpolation, we replaced the interpolated values with the observed ones where possible, as shown below.
 
 ```{r, size="small"}
 #matching decimal positions in ages
-char.interpolated$age<-round(char.interpolated$age, 2)
-char$age <- round(char$age, 2)
+char.interpolated$age <- round(
+  char.interpolated$age, 
+  2
+  )
+
+char$age <- round(
+  char$age, 
+  2
+  )
 
 #for every age in char.interpolated
 for(i in char.interpolated$age){
@@ -199,11 +204,13 @@ for(i in char.interpolated$age){
   
   #if observed.i is not empty
   if(length(observed.i) > 0){
+    
     #replacing interpolated by observed
     char.interpolated[
       char.interpolated$age == i, 
       "charcoal.acc.rate"
       ] <- max(observed.i) #if two or more observed values with same age
+    
   }
 }
 ```
@@ -214,24 +221,70 @@ for(i in char.interpolated$age){
 
 #plot to compare observed and interpolated char curves
 plot.1 <- ggplot() + 
-  geom_line(data=char, aes(x=age, y=charcoal.acc.rate), col="gray70", size=0.6) +
-  geom_line(data=char.interpolated, aes(x=age, y=charcoal.acc.rate), color="red4", size=0.5, alpha=0.5) +
+  geom_line(
+    data = char, 
+    aes(
+      x = age, 
+      y = charcoal.acc.rate
+      ), 
+    col = "gray70", 
+    size = 0.6
+    ) +
+  geom_line(
+    data = char.interpolated, 
+    aes(
+      x = age, 
+      y = charcoal.acc.rate
+      ), 
+    color = "red4", 
+    size = 0.5, 
+    alpha = 0.5
+    ) +
   ylab("CHAR (particles/cm2 yr)") +
-  scale_x_continuous(breaks=seq(0, ceiling(max(bale.data$age)), by=1)) +
+  scale_x_continuous(
+    breaks = seq(0, ceiling(max(bale.data$age)), 
+                 by=1
+                 )
+    ) +
   xlab("Age (ka BP)") +
-  theme(axis.title.y = element_text(size=8))
+  theme(axis.title.y = element_text(size = 8))
 
 plot.1.zoom <- ggplot() + 
-  geom_line(data=char, aes(x=age, y=charcoal.acc.rate), col="gray70", size=0.6) +
-  geom_line(data=char.interpolated, aes(x=age, y=charcoal.acc.rate), color="red4", size=0.5, alpha=0.5) +
+  geom_line(
+    data = char, 
+    aes(
+      x = age, 
+      y = charcoal.acc.rate
+      ), 
+    col = "gray70", 
+    size = 0.6
+    ) +
+  geom_line(
+    data = char.interpolated, 
+    aes(
+      x = age, 
+      y = charcoal.acc.rate
+      ), 
+    color = "red4", 
+    size = 0.5, 
+    alpha = 0.5
+    ) +
   ylab("") +
-  scale_x_continuous(breaks=seq(13, 13.5, by=0.1)) +
+  scale_x_continuous(breaks = seq(13, 13.5, by = 0.1)) +
   ylab("CHAR (particles/cm2 yr)") +
   xlab("Age (ka BP)") +
-  coord_cartesian(xlim=c(13, 13.5), ylim=c(0, 20)) +
-  theme(axis.title.y = element_text(size=8))
+  coord_cartesian(
+    xlim = c(13, 13.5), 
+    ylim = c(0, 20)
+    ) +
+  theme(axis.title.y = element_text(size = 8))
 
-plot_grid(plot.1, plot.1.zoom, nrow = 2, labels = "auto")
+plot_grid(
+  plot.1, 
+  plot.1.zoom, 
+  nrow = 2, 
+  labels = "auto"
+  )
 
 #matching erica ages with char.interpolated ages
 erica <- erica[erica$age >= min(char.interpolated$age), ]
@@ -260,34 +313,64 @@ Where:
 erica$age <- round(erica$age, 2)
 
 #pairing samples of erica and interpolated charcoal
-erica.char <- merge(erica, char.interpolated, by="age")
+erica.char <- merge(
+  erica, char.interpolated, 
+  by = "age"
+  )
 ```
 
 
 ```{r, size="small", results="hide", message=FALSE, error=FALSE, warning=FALSE}
 #fitting GLS model
-erica.char.gls <- gls(ericaceae.par ~ charcoal.acc.rate, 
-                      data=erica.char)
+erica.char.gls <- gls(
+  ericaceae.par ~ charcoal.acc.rate,
+  data = erica.char
+  )
 
-#pseudo R2 (gls doesn't provide R2)
-erica.char.gls.R2 <- cor(erica.char$ericaceae.par, 
-    predict(erica.char.gls))^2
+#R2 (gls doesn't provide R2)
+erica.char.gls.R2 <- cor(
+  erica.char$ericaceae.par,
+  predict(erica.char.gls)
+  )^2
 ```
 
-The model showed a pseudo R-squared value (*gls* does not compute R-squared) of `r round(erica.char.gls.R2, 3)`. **Figure 4** shows the data and the fitted model.
+The model showed a R-squared (*gls* does not compute R-squared) of `r round(erica.char.gls.R2, 3)`. **Figure 4** shows the data and the fitted model.
 
 ```{r, fig.height=5, echo=FALSE, fig.cap="Erica abundances paired with synchronous samples of charcoal accumulation rate. Straight line shows the fit of the GLS model shown above."}
 #adding predicted and residual values to erica.char
 erica.char$ericaceae.par.predicted <- predict(erica.char.gls)
 
 #plotting erica vs char
-ggplot(data=erica.char, aes(x=charcoal.acc.rate, y=ericaceae.par)) + 
-  geom_point(shape=21, fill="gray50", color="black", size=4, alpha=0.5) +
-  geom_line(aes(x=charcoal.acc.rate, y=ericaceae.par.predicted), size=2, color="red4", alpha=0.6) +
+ggplot(
+  data = erica.char, 
+  aes(
+    x = charcoal.acc.rate, 
+    y = ericaceae.par
+    )
+  ) + 
+  geom_point(
+    shape = 21, 
+    fill = "gray50", 
+    color = "black", 
+    size = 4, 
+    alpha = 0.5
+    ) +
+  geom_line(
+    aes(
+      x = charcoal.acc.rate, 
+      y = ericaceae.par.predicted
+      ), 
+    size = 2, 
+    color = "red4", 
+    alpha = 0.6
+    ) +
   xlab("CHAR (particles/cm2 yr)") + 
   ylab("Erica PAR (pollen grains/cm2yr)") +
   ggtitle("Erica vs. CHAR") +
-  theme(text=element_text(size=12), plot.title=element_text(size = 16))
+  theme(
+    text = element_text(size = 12), 
+    plot.title = element_text(size  =  16)
+    )
 ```
 
 ### Generating time-delayed (lagged) data
@@ -304,20 +387,20 @@ lags<-1:101
 
 #forward dataset
 lag.data.forward <- forwardLags(
-  lags=lags,
-  reference.data=erica,
-  data.to.lag=char.interpolated
+  lags = lags,
+  reference.data = erica,
+  data.to.lag = char.interpolated
   )
 
 #backward dataset
 lag.data.backward <- backwardLags(
-  lags=lags, 
-  reference.data=erica, 
-  data.to.lag=char.interpolated
+  lags = lags, 
+  reference.data = erica, 
+  data.to.lag = char.interpolated
   )
 ```
 
-**Figure 6** shows both datasets for lags 1 (10 years), 25 (250 years), 50 (500 years), 75 (750 years), and 100 (1000 years). It also shows an advance of the models that will be fitted in the following section.
+**Figure 5** shows both datasets for lags 1 (10 years), 25 (250 years), 50 (500 years), 75 (750 years), and 100 (1000 years). It also shows an advance of the models that will be fitted in the following section.
 
 
 ```{r, echo=FALSE, fig.height=11, fig.cap="Lags 1, 25, 50, 75, and 100 of the backward and forward datasets. Lag number can be found withing the grey strips. They have to be multiplied by 10 to convert lags into years. Lines represent linear models equivalent to those fitted in the following section."}
@@ -331,25 +414,77 @@ temp.forward <- temp.forward[temp.forward$lag %in% c(1, 25, 50, 75, 100),]
 temp.backward <- temp.backward[temp.backward$lag%in% c(1, 25, 50, 75, 100),]
 
 
-plot.past <- ggplot(data=temp.backward, aes(x=charcoal.acc.rate, y=ericaceae.par, group=lag)) + 
-      geom_point(shape=21, fill="gray50", color="black", size=2, alpha=0.5) +
-  facet_wrap("lag", ncol=1) +
+plot.past <- ggplot(
+  data = temp.backward, 
+  aes(
+    x = charcoal.acc.rate, 
+    y = ericaceae.par, 
+    group = lag
+  )
+) + 
+  geom_point(
+    shape = 21, 
+    fill = "gray50", 
+    color = "black", 
+    size = 2, 
+    alpha = 0.5
+  ) +
+  facet_wrap("lag", ncol = 1) +
   xlab("CHAR (particles/cm2 yr)") +
   ylab("Erica PAR (pollen grains/cm2yr)") +
   ggtitle("Backward (PAR ~ CHAR)") +
-  theme(text=element_text(size=12),
-        plot.title=element_text(size = 16), legend.position="none") +
-  geom_smooth(method = lm, size=2, color="red4", se=FALSE, aes(alpha=0.5))
-    
-    plot.future <- ggplot(data=temp.forward, aes(x=ericaceae.par, y=charcoal.acc.rate)) + geom_point(shape=21, fill="gray50", color="black", size=2, alpha=0.5) +
-      facet_wrap("lag", ncol=1) +
-      xlab("Erica PAR (pollen grains/cm2yr)") + 
-      ylab("CHAR (particles/cm2 yr)") +
-      ggtitle("Forward (CHAR ~ PAR)") +
-      theme(text=element_text(size=12), plot.title=element_text(size = 16), legend.position="none") +
-  geom_smooth(method = lm, size=2, color="red4", se=FALSE, aes(alpha=0.5))
-    
-    print(cowplot::plot_grid(plot.past, plot.future, align="h", ncol=2))
+  theme(
+    text = element_text(size = 12),
+    plot.title = element_text(size = 16), 
+    legend.position = "none"
+  ) +
+  geom_smooth(
+    method  =  lm, 
+    size = 2, 
+    color = "red4", 
+    se = FALSE,
+    aes(alpha = 0.5),
+    formula = y ~ x
+  )
+
+plot.future <- ggplot(
+  data = temp.forward, 
+  aes(
+    x = ericaceae.par, 
+    y = charcoal.acc.rate
+  )
+) + geom_point(
+  shape = 21, 
+  fill = "gray50", 
+  color = "black", 
+  size = 2, 
+  alpha = 0.5
+) +
+  facet_wrap("lag", ncol = 1) +
+  xlab("Erica PAR (pollen grains/cm2yr)") + 
+  ylab("CHAR (particles/cm2 yr)") +
+  ggtitle("Forward (CHAR ~ PAR)") +
+  theme(
+    text = element_text(size = 12), 
+    plot.title = element_text(size = 16), 
+    legend.position = "none"
+  ) +
+  geom_smooth(
+    method = lm, 
+    size = 2, 
+    color = "red4", 
+    se = FALSE, aes(alpha = 0.5),
+    formula = y ~ x
+  )
+
+print(
+  cowplot::plot_grid(
+    plot.past, 
+    plot.future, 
+    align = "h",
+    ncol = 2
+  )
+)
 ```
 
 ## Asynchronous models: time-delayed links between Erica abundance and charcoal accumulation rate
@@ -368,54 +503,56 @@ Where:
 +  $t$ is the age of the given response sample.
 +  $lag$, with values between 10 and 1000 (in 10 years time-steps), represents the time-span in between the response samples and the antecedent samples of the given predictor.
 
-Equations 2 and 3 were fitted once per lag on standardized data with generalised least squares (GLS) by using the gls function of the R package nlme [31]. Pseudo R-squared and standardized coefficient estimates with their respective confidence intervals were used to assess goodness of fit. 100 null models on permutated response variables were fitted for each equation to assess statistical significance.
+Equations 2 and 3 were fitted once per lag on standardized data with generalised least squares (GLS) by using the gls function of the R package nlme [31]. R-squared and standardized coefficient estimates with their respective confidence intervals were used to assess goodness of fit. 100 null models on permutated response variables were fitted for each equation to assess statistical significance.
 
-We fitted the models through the custom function *modelLagData*, that requires a formula, and a lagged dataset. The function automatically fits one GLS model per lag, and stores pseudo R-squared values and standardized coefficient estimates.
+We fitted the models through the custom function *modelLagData*, that requires a formula, and a lagged dataset. The function automatically fits one GLS model per lag, and stores R-squared values and standardized coefficient estimates.
 
 ```{r, size="small"}
 #fitting a GLS model per lag on backward datasets
 backward.results <- modelLagData(
-  model.formula="ericaceae.par ~ charcoal.acc.rate", 
-  lagged.data=lag.data.backward
+  model.formula = "ericaceae.par ~ charcoal.acc.rate", 
+  lagged.data = lag.data.backward
   )
 
 #for the forward dataset
 forward.results <- modelLagData(
-  model.formula="charcoal.acc.rate ~ ericaceae.par", 
-  lagged.data=lag.data.forward
+  model.formula = "charcoal.acc.rate ~ ericaceae.par", 
+  lagged.data = lag.data.forward
   )
 ```
 
 \newpage
 
-To test the deviation of coefficient estimates and pseudo R-squared from random results we fitted each model 1000 times on permuted values of the response. The quantiles 0.05 and 0.95 of the resulting coefficient estimates and pseudo R-squared values were used as reference limits to differentiate random from non-random results. This operation was performed through the custom function *modelRandomLagData*, which takes a lagged dataset, a formula, and a number of iterations, and fits as many GLS models as iterations indicated, with the particularity that on each model the response is permutated. Aggregated pseudo R-squared values and standardized coefficient estimates of these models provide a robust null model to test the significance of our findings.
+To test the deviation of coefficient estimates and R-squared from random results we fitted each model 1000 times on permuted values of the response. The quantiles 0.05 and 0.95 of the resulting coefficient estimates and R-squared values were used as reference limits to differentiate random from non-random results. This operation was performed through the custom function *modelRandomLagData*, which takes a lagged dataset, a formula, and a number of iterations, and fits as many GLS models as iterations indicated, with the particularity that on each model the response is permutated. Aggregated R-squared values and standardized coefficient estimates of these models provide a robust null model to test the significance of our findings.
  
 ```{r, cache=TRUE, size="small"}
 backward.results.random <- modelRandomLagData(
-  lagged.data=lag.data.backward, 
-  model.formula="ericaceae.par ~ charcoal.acc.rate", 
-  iterations=1000
+  lagged.data = lag.data.backward, 
+  model.formula = "ericaceae.par ~ charcoal.acc.rate", 
+  iterations = 1000
   )
 
 forward.results.random <- modelRandomLagData(
-  lagged.data=lag.data.forward, 
-  model.formula="charcoal.acc.rate ~ ericaceae.par", 
-  iterations=1000
+  lagged.data = lag.data.forward, 
+  model.formula = "charcoal.acc.rate ~ ericaceae.par", 
+  iterations = 1000
   )
 ```
 
-Coefficient estimates with their standard errors and pseudo R-squared values were extracted from each model and plotted against lagged age to facilitate the interpretation of the results. **Figure 7** shows the results of the fitted models.
+Coefficient estimates with their standard errors and R-squared values were extracted from each model and plotted against lagged age to facilitate the interpretation of the results. **Figure 7** shows the results of the fitted models.
 
-```{r, echo=FALSE, fig.height=6, fig.cap="Results of the time-lagged models. Left panel represents models fitted with Equation 1, that is, the influence of antecedent values of CHAR on the pollen abundance of Erica (PAR) across time-lags up to 1000 years. The right panel represents the influence of antecedent values of Erica PAR on CHAR over the same time-lags. Yellow strips represent standardized coefficients and pseudo R-squared values for the null model. Data not intersecting yellow strips is interpreted as statistically significant."}
-plotModelOutput(forward.results=forward.results, 
-              forward.results.random=forward.results.random, 
-              backward.results=backward.results, 
-              backward.results.random=backward.results.random, 
-              filename="Figure_2.pdf", 
-              width=9, 
-              height=6, 
-              title.size=16, 
-              text.size=10)
+```{r, echo=FALSE, fig.height=6, fig.cap="Results of the time-lagged models. Left panel represents models fitted with Equation 1, that is, the influence of antecedent values of CHAR on the pollen abundance of Erica (PAR) across time-lags up to 1000 years. The right panel represents the influence of antecedent values of Erica PAR on CHAR over the same time-lags. Yellow strips represent standardized coefficients and R-squared values for the null model. Data not intersecting yellow strips is interpreted as statistically significant."}
+plotModelOutput(
+  forward.results = forward.results,
+  forward.results.random = forward.results.random,
+  backward.results = backward.results,
+  backward.results.random = backward.results.random,
+  filename = "Figure_2.pdf",
+  width = 9,
+  height = 6,
+  title.size = 16,
+  text.size = 10
+  )
 ```
 
 
